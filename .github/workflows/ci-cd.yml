@@ -8,7 +8,7 @@ on:
 
 env:
   ARTIFACT_LOCATION: europe-west1
-  ARTIFACT_REPO_ID: metasounds-quentin
+  ARTIFACT_REPO_ID: metasounds-billy
   GCP_PROJECT_ID: cs-poc-hpzdycpiqjyvinhrczvlwcn
   IMAGE_NAME: metasounds
   CONTAINER_NAME: metasounds
