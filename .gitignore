@@ -1,0 +1,9 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Clés : ne jamais commiter
+*.json
+*_id_rsa
+*.pem
