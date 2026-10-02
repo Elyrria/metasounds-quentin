@@ -37,6 +37,26 @@ jobs:
         if: failure()
         run: docker logs smoke
 
+      # Rapport complet, pour information (ne bloque pas)
+      - name: Scan Trivy (rapport)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: metasounds:test
+          format: table
+          severity: LOW,MEDIUM,HIGH,CRITICAL
+          exit-code: '0'
+
+      # Bloque le pipeline s'il reste des failles HIGH/CRITICAL corrigeables
+      - name: Scan Trivy (bloquant)
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: metasounds:test
+          format: table
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          exit-code: '1'
+          skip-setup-trivy: true
+
   # CD : push sur Artifact Registry puis déploiement sur la VM (uniquement sur main)
   deploy:
     needs: test
